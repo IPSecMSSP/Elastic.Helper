@@ -8,7 +8,7 @@ function Update-EsEnrichmentIndicesFromIndex {
       [string] [Parameter(Mandatory=$true)] $IndexName
   )
 
-  # Look through the Enrich Policies in our configuraton
+  # Look through the Enrich Policies in our configuration
   foreach ($Policy in $EsConfig._enrich.policies) {
       # Find those that depend on our index
       if ($IndexName -match $Policy.definition.match.indices) {
