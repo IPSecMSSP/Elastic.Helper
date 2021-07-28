@@ -1,78 +1,78 @@
 {
-    "eshome": "http://172.29.1.20:9200",
-    "indices": [
-        {
-            "name": "fs-departments",
-            "pipeline": "fs-departments",
-            "settings": {
-                "index": {
-                  "number_of_replicas": "0"
-                }
-              }
-        },
-        {
-            "name": "fs-requesters",
-            "pipeline": "fs-requesters",
-            "settings": {
-                "index": {
-                  "number_of_replicas": "0"
-                }
-            }
+  "eshome": "http://172.29.1.20:9200",
+  "indices": [
+    {
+      "name": "fs-departments",
+      "pipeline": "fs-departments",
+      "settings": {
+        "index": {
+          "number_of_replicas": "0"
         }
-    ],
-    "_ingest": {
-        "pipelines": [
+      }
+    },
+    {
+      "name": "fs-requesters",
+      "pipeline": "fs-requesters",
+      "settings": {
+        "index": {
+          "number_of_replicas": "0"
+        }
+      }
+    }
+  ],
+  "_ingest": {
+    "pipelines": [
+      {
+        "name": "fs-departments",
+        "definition": {
+          "description": "Ingest Pipeline for FreshService Department records",
+          "processors": [
             {
-                "name": "fs-departments",
-                "definition": {
-                    "description": "Ingest Pipeline for FreshService Department records",
-                    "processors": [
-                      {
-                        "set": {
-                          "field": "_id",
-                          "value": "{{id}}",
-                          "description": "Set Doc ID to the internal FreshService ID"
-                        }
-                      }
-                    ]
-                }
+              "set": {
+                "field": "_id",
+                "value": "{{id}}",
+                "description": "Set Doc ID to the internal FreshService ID"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "fs-requesters",
+        "definition": {
+          "description": "Ingest Pipeline for FreshService Requester records",
+          "processors": [
+            {
+              "set": {
+                "field": "_id",
+                "value": "{{id}}"
+              }
             },
             {
-                "name": "fs-requesters",
-                "definition": {
-                    "description": "Ingest Pipeline for FreshService Requester records",
-                    "processors": [
-                        {
-                          "set": {
-                            "field": "_id",
-                            "value": "{{id}}"
-                          }
-                        },
-                        {
-                          "enrich": {
-                            "policy_name": "department-lookup",
-                            "field": "department_ids",
-                            "target_field": "department",
-                            "max_matches": 1
-                          }
-                        }
-                      ]
-                }
+              "enrich": {
+                "policy_name": "department-lookup",
+                "field": "department_ids",
+                "target_field": "department",
+                "max_matches": 1
+              }
             }
-        ]
-    },
-    "_enrich": {
-        "policies": [
-            {
-                "name": "department-lookup",
-                "definition": {
-                    "match": {
-                      "indices": "fs-departments",
-                      "match_field": "id",
-                      "enrich_fields": ["name","description"]
-                    }
-                }
-            }
-        ]
-    }
+          ]
+        }
+      }
+    ]
+  },
+  "_enrich": {
+    "policies": [
+      {
+        "name": "department-lookup",
+        "definition": {
+          "match": {
+            "indices": "fs-departments",
+            "match_field": "id",
+            "enrich_fields": ["name", "description"]
+          }
+        }
+      }
+    ]
+  }
 }
