@@ -9,7 +9,7 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-# RootModule = ''
+RootModule = 'Elastic.Helper.psm1'
 
 # Version number of this module.
 ModuleVersion = '0.0.1'
@@ -69,15 +69,15 @@ Description = 'A PowerShell Helper Module to interface with ElasticSearch'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = @()
+FunctionsToExport = @('Deploy-EsConfig', 'Get-EsEnrichmentPolicy',
+'Get-EsHelperConfig', 'Get-EsIndex', 'Get-EsIndexSettings',
+'Get-EsPipeline', 'Test-EsEnrichPolicyDepends', 'Test-EsIndexDepends',
+'Test-EsPipelineDepends', 'Update-EsEnrichmentIndicesFromIndex',
+'Update-EsEnrichmentPolicy', 'Update-EsIndexSettings',
+'Update-EsIndexSettingsFromConfig', 'Update-EsPipeline')
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
-CmdletsToExport = 'Deploy-EsConfig', 'Get-EsEnrichmentPolicy',
-               'Get-EsHelperConfig', 'Get-EsIndex', 'Get-EsIndexSettings',
-               'Get-EsPipeline', 'Test-EsEnrichPolicyDepends', 'Test-EsIndexDepends',
-               'Test-EsPipelineDepends', 'Update-EsEnrichmentIndicesFromIndex',
-               'Update-EsEnrichmentPolicy', 'Update-EsIndexSettings',
-               'Update-EsIndexSettingsFromConfig', 'Update-EsPipeline'
+CmdletsToExport = @()
 
 # Variables to export from this module
 VariablesToExport = '*'
@@ -100,19 +100,19 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        # Tags = @()
+        Tags = @('elastic', 'PSEdition_Core')
 
         # A URL to the license for this module.
         # LicenseUri = ''
 
         # A URL to the main website for this project.
-        # ProjectUri = ''
+        ProjectUri = 'https://github.com/jberkers42/Elastic.Helper'
 
         # A URL to an icon representing this module.
         # IconUri = ''
 
         # ReleaseNotes of this module
-        # ReleaseNotes = ''
+        ReleaseNotes = 'Initial release to PS Gallery'
 
         # Prerelease string of this module
         # Prerelease = ''
@@ -121,7 +121,7 @@ PrivateData = @{
         # RequireLicenseAcceptance = $false
 
         # External dependent modules of this module
-        # ExternalModuleDependencies = @()
+        ExternalModuleDependencies = @()
 
     } # End of PSData hashtable
 

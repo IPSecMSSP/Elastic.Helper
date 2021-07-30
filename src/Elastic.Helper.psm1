@@ -2,6 +2,8 @@
 
 ## If Importing Module Source Directly, This Will Dynamically Build Root Module ##
 
+Import-Module Elastic.Console
+
 # Get list of private functions and public functions to import, in order.
 $Private = @(Get-ChildItem -Path $PSScriptRoot\Private -Recurse -Filter "*.ps1") | Sort-Object Name
 $Public = @(Get-ChildItem -Path $PSScriptRoot\Public -Recurse -Filter "*.ps1") | Sort-Object Name
