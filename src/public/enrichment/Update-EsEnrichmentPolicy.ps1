@@ -24,7 +24,7 @@ function Update-EsEnrichmentPolicy {
 
       PS C:\> $EnrichPol = Update-EsEnrichmentPolicy -EsUrl http://192.168.1.10:9200 -Policy 'MyEnrichmentPolicy' -PolicyDefinition $PolicyDef
   .LINK
-      https://github.com/jberkers42/Elastic-Helper
+      https://github.com/jberkers42/Elastic.Helper
   #>
 
   [CmdletBinding(SupportsShouldProcess)]

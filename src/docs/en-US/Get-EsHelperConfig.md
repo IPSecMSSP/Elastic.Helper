@@ -69,4 +69,4 @@ The function expects to build a path to a valid JSON file containing a specific 
 
 ## RELATED LINKS
 
-[Elastic.Helper on GitHub](https://github.com/jberkers42/Elastic-Helper)
+[Elastic.Helper on GitHub](https://github.com/jberkers42/Elastic.Helper)

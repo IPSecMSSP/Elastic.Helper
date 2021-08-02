@@ -24,7 +24,7 @@ function Update-EsEnrichmentIndices {
 
         PS C:\> $result = Update-EsEnrichmentIndices -EsUrl http://192.168.1.10:9200 -Policy 'MyEnrichmentPolicy'
     .LINK
-        https://github.com/jberkers42/Elastic-Helper
+        https://github.com/jberkers42/Elastic.Helper
     #>
 
 

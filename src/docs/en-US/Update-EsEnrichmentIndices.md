@@ -64,4 +64,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Elastic.Helper on GitHub](https://github.com/jberkers42/Elastic-Helper)
+[Elastic.Helper on GitHub](https://github.com/jberkers42/Elastic.Helper)

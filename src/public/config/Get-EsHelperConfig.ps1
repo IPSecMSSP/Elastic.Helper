@@ -15,7 +15,7 @@ function Get-EsHelperConfig {
 
         On Windows this will be determined by Group Policy, but defaults to C:\Users\<username>
 
-        On Linux this will be determined by OS configuration, but is usally /home/<username>
+        On Linux this will be determined by OS configuration, but is usually /home/<username>
 
         On Mac OS/X this is usually /Users/<username>
     .INPUTS
@@ -31,7 +31,7 @@ function Get-EsHelperConfig {
 
         PS C:\> $EsConf = Get-EsHelperConfig -ConfigName elasticproject -Path '/opt/scripts/project/etc'
     .LINK
-        https://github.com/jberkers42/Elastic-Helper
+        https://github.com/jberkers42/Elastic.Helper
     #>
 
     [CmdletBinding()]

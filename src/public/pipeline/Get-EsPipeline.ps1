@@ -22,7 +22,7 @@ function Get-EsPipeline {
 
       PS C:\> $EsPipeline = Get-EsPipeline -EsUrl http://192.168.1.10:9200 -Pipeline 'MyPipeline'
   .LINK
-      https://github.com/jberkers42/Elastic-Helper
+      https://github.com/jberkers42/Elastic.Helper
   #>
 
   [CmdletBinding()]

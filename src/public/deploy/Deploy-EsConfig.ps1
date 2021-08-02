@@ -39,7 +39,7 @@ function Deploy-EsConfig {
 
         PS C:\> $EsConf = Get-EsHelperConfig -ConfigName elasticproject -Path '/opt/scripts/project/etc'
     .LINK
-        https://github.com/jberkers42/Elastic-Helper
+        https://github.com/jberkers42/Elastic.Helper
     #>
 
     [CmdletBinding()]

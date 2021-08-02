@@ -28,7 +28,7 @@ function Update-EsIndexSettings {
       PS C:\> $IndexDef = @{'index' = @{ 'number_of_replicas' = '0'} }
       PS C:\> $EnrichPol = Update-EsIndexSettings -EsUrl http://192.168.1.10:9200 -IndexName 'MyIndex' -IndexDefinition $IndexDef
   .LINK
-      https://github.com/jberkers42/Elastic-Helper
+      https://github.com/jberkers42/Elastic.Helper
   #>
 
     [CmdletBinding(SupportsShouldProcess)]

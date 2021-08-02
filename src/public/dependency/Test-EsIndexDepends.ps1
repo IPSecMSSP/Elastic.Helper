@@ -30,7 +30,7 @@ function Test-EsIndexDepends {
 
         PS C:\> $Result = Test-EsIndexDepends -EsConfig $EsConfig -IndexName 'MyIndex'
     .LINK
-        https://github.com/jberkers42/Elastic-Helper
+        https://github.com/jberkers42/Elastic.Helper
     #>
 
   [CmdletBinding()]
