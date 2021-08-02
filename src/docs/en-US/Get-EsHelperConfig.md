@@ -8,7 +8,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Load the Elastic.Helper configuration from a saved file
+Import an Elastic Helper configuration.
 
 ## SYNTAX
 
@@ -16,22 +16,30 @@ Load the Elastic.Helper configuration from a saved file
 Get-EsHelperConfig -ConfigName <ConfigurationName> [-Path <Path to Config directory>] [<CommonParameters>]
 ```
 
-The default path used is .eshelper folder in the user's home directory (platform dependent)
-
 ## DESCRIPTION
 
 This function loads a saved configuration, in JSON format, from a file into memory.  The configuration file is expected to have a specific structure, see the examples folder in the project
 for details. Index, pipeline
 
+The default path used is .eshelper folder in the user's home directory (platform dependent)
+
 ## EXAMPLES
 
 ### Example 1
 
+Load Configuration file 'elasticproject.json' from default folder into the $EsConf variable
+
 ```pwsh
-PS C:> Get-EsHelperConfig -ConfigName fresh-elastic
+PS C:\> $EsConf = Get-EsHelperConfig -ConfigName elasticproject
 ```
 
-Load a configuration file named fresh-elastic.json from .eshelper folder in user's home directory.
+### Example 2
+
+Load Configuration file 'elasticproject.json' from '/opt/scripts/project/etc'
+
+```pwsh
+PS C:\> $EsConf = Get-EsHelperConfig -ConfigName elasticproject -Path '/opt/scripts/project/etc'
+```
 
 ## PARAMETERS
 
@@ -49,12 +57,16 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
+### System.String -> Configuration Name
 
 ## OUTPUTS
 
-### System.Object
+### PSCustomObject (Hash) representing the configuration file contents
 
 ## NOTES
 
+The function expects to build a path to a valid JSON file containing a specific structure.  An example configuration file can be found in the examples folder of the project.
+
 ## RELATED LINKS
+
+[Elastic.Helper on GitHub](https://github.com/jberkers42/Elastic.Helper)

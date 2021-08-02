@@ -12,7 +12,7 @@
 RootModule = 'Elastic.Helper.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.1'
+ModuleVersion = '0.0.3'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -112,7 +112,7 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = 'Initial release to PS Gallery'
+        ReleaseNotes = 'Added support for authentication to ElasticSearch, added documentation'
 
         # Prerelease string of this module
         # Prerelease = ''
