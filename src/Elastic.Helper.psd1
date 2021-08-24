@@ -12,7 +12,7 @@
 RootModule = 'Elastic.Helper.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.6'
+ModuleVersion = '0.0.7'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -75,7 +75,7 @@ FunctionsToExport = @('Deploy-EsConfig', 'Get-EsEnrichmentPolicy',
 'Test-EsPipelineDepends', 'Update-EsEnrichmentIndicesFromIndex',
 'Update-EsEnrichmentPolicy', 'Update-EsIndexSettings',
 'Update-EsIndexSettingsFromConfig', 'Update-EsPipeline', 'Invoke-EsBulkIndexRequest',
-'Get-EsIndexDefinition')
+'Get-EsIndexDefinition','ConvertTo-EsBulkIndex')
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
