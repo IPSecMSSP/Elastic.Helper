@@ -34,6 +34,7 @@ function Test-EsIndexDepends {
     #>
 
   [CmdletBinding()]
+  [OutputType([Int32])]
 
   param (
     [PSCustomObject] [Parameter(Mandatory=$true)] $EsConfig,
