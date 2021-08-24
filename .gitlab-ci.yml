@@ -4,7 +4,11 @@
 include:
   - project: "ipsec/citemplates"
     ref: master
-    file: "/linting/megalinter-minimal.yml"
+    file: "/linting/megalinter-dotnet.yml"
+
+  - project: "ipsec/citemplates"
+    ref: master
+    file: "/test/pwsh-pester.yml"
 
 stages:
   - linting
@@ -12,3 +16,9 @@ stages:
 
 megalinter:
   extends: .megalinter-minimal
+  image:
+    name: nvuillam/mega-linter-dotnet:latest
+    entrypoint: [""]
+
+pester:
+  extends: .pwsh_pester

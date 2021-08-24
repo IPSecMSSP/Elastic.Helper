@@ -1,6 +1,12 @@
-. $PSScriptRoot\_InitializeTests.ps1
+BeforeAll {
+  # Setup for Testing
+  $here = Split-Path -Parent $PSCommandPath
+  $here += '/_InitializeTests.ps1'
+  . $here
 
-$Manifest = Import-PowerShellDataFile -Path $ModuleManifestPath
+  $Manifest = Import-PowerShellDataFile -Path $ModuleManifestPath
+  Write-Verbose $Manifest.RootModule
+}
 
 Describe "FreshService.Tools Module Manifest" {
 
