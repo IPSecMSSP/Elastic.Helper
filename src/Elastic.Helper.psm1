@@ -5,8 +5,8 @@
 Import-Module Elastic.Console
 
 # Get list of private functions and public functions to import, in order.
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private -Recurse -Filter "*.ps1") | Sort-Object Name
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public -Recurse -Filter "*.ps1") | Sort-Object Name
+$Private = @(Get-ChildItem -Path $PSScriptRoot\private -Recurse -Filter "*.ps1") | Sort-Object Name
+$Public = @(Get-ChildItem -Path $PSScriptRoot\public -Recurse -Filter "*.ps1") | Sort-Object Name
 
 # Dot source the private function files.
 foreach ($ImportItem in $Private) {
