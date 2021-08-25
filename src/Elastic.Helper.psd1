@@ -12,7 +12,7 @@
 RootModule = 'Elastic.Helper.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.3'
+ModuleVersion = '0.0.7'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -74,7 +74,8 @@ FunctionsToExport = @('Deploy-EsConfig', 'Get-EsEnrichmentPolicy',
 'Get-EsPipeline', 'Test-EsEnrichPolicyDepends', 'Test-EsIndexDepends',
 'Test-EsPipelineDepends', 'Update-EsEnrichmentIndicesFromIndex',
 'Update-EsEnrichmentPolicy', 'Update-EsIndexSettings',
-'Update-EsIndexSettingsFromConfig', 'Update-EsPipeline')
+'Update-EsIndexSettingsFromConfig', 'Update-EsPipeline', 'Invoke-EsBulkIndexRequest',
+'Get-EsIndexDefinition','ConvertTo-EsBulkIndex')
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
@@ -112,7 +113,7 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = 'Added support for authentication to ElasticSearch, added documentation'
+        ReleaseNotes = 'Added support for bulk indexing'
 
         # Prerelease string of this module
         # Prerelease = ''
