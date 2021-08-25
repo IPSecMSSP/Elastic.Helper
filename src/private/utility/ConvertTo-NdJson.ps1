@@ -1,5 +1,5 @@
 # Convert to Newline Delimited JSON
-function ConvertTo-NDJSON {
+function ConvertTo-NdJson {
   <#
   .SYNOPSIS
     Convert JSON/PSObject to Newline Delimited JSON (NDJSON) for bulk imports to ES
