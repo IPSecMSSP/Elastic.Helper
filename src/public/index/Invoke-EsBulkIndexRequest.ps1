@@ -22,7 +22,7 @@ function Invoke-EsBulkIndexRequest {
 
   Write-Debug "Processing Bulk Index Request..."
 
-  $BulkIndexURI = '{0}/{1}/_bulk' -f $EsConfig.eshome, $IndexName
+  $BulkIndexURI = '{0}/_bulk' -f $EsConfig.eshome, $IndexName
 
   Write-Debug " URI: $BulkIndexURI"
 
