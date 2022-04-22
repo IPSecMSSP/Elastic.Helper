@@ -54,7 +54,7 @@ function Test-EsEnrichPolicyExists {
       if ($RunningPolicy.policies.Count -eq 0) {
         $msg = "Unmet Dependency: Enrichment Policy {0} not loaded" -f $Policy.name
         Write-Error $msg
-        WriteOutput $False
+        Write-Output $False
       } else {
         $msg = "Dependency Met: Enrichment Policy {0} loaded" -f $Policy.name
         Write-Verbose $msg
