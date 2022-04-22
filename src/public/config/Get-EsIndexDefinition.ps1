@@ -12,12 +12,19 @@
 function Get-EsIndexDefinition {
   param (
     [PSCustomObject] [Parameter(Mandatory=$true)] $EsConfig,
-    [string] [Parameter(Mandatory=$true)] $IndexName
+    [string] [Parameter(Mandatory=$true)] $IndexName,
+    [switch] [Parameter(Mandatory=$false)] $Exact
   )
 
   foreach ($Index in $EsConfig.Indices) {
-    if ($IndexName -match $Index.name) {
-      return $Index
+    if ($Exact) {
+      if ($IndexName -eq $Index.name) {
+        return $Index
+      }
+    } else {
+      if ($IndexName -match $Index.name) {
+        return $Index
+      }
     }
   }
 }

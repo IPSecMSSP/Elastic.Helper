@@ -45,6 +45,9 @@ foreach ($Policy in $EsConfig._enrich.policies) {
             # Update the Enrichment Index
             $msg = "Updating Enrichment Policy Index - Index: {0}; Policy: {1};" -f $IndexName, $Policy.name
             Write-Debug $msg
+
+            # Sleep briefly to allow Index to quiesce
+            Start-Sleep -Seconds 1
             if ($EsCreds) {
               $result = Update-EsEnrichmentIndices -ESUrl $EsConfig.eshome -Policy $Policy.name -EsCreds $EsCreds
             } else {

@@ -39,44 +39,44 @@ function Test-EsEnrichPolicyDepends {
     [PSCustomObject] [Parameter(Mandatory=$true)] $EsConfig,
     [string] [Parameter(Mandatory=$false)] $PolicyName,
     [PSCustomObject] [Parameter(Mandatory=$false)] $EsCreds
-)
+  )
 
 # Find the Enrichment Policy in the config
 
-foreach ($Policy in $EsConfig._enrich.policies) {
+  foreach ($Policy in $EsConfig._enrich.policies) {
     # Check all policies if none specified, otherwise check just the one
     if(-not ($PSBoundParameters.ContainsKey('PolicyName')) -or $Policy.name -eq $PolicyName) {
-        $EsIndex = $Policy.definition.match.indices
-        Write-Debug "  Checking Index: $EsIndex"
-        if ($EsCreds) {
-          $EsIndexStatus = Get-EsIndex -ESUrl $EsConfig.eshome -EsIndex $EsIndex -EsCreds $EsCreds
-        } else {
-          $EsIndexStatus = Get-EsIndex -ESUrl $EsConfig.eshome -EsIndex $EsIndex
-        }
+      $EsIndex = $Policy.definition.match.indices
+      Write-Debug "  Checking Index: $EsIndex"
+      if ($EsCreds) {
+        $EsIndexStatus = Get-EsIndex -ESUrl $EsConfig.eshome -EsIndex $EsIndex -EsCreds $EsCreds
+      } else {
+        $EsIndexStatus = Get-EsIndex -ESUrl $EsConfig.eshome -EsIndex $EsIndex
+      }
 
-        Write-Debug "Index Status: $EsIndexStatus"
-        if($EsIndexStatus.Error) {
-          if ($EsIndexStatus.status -eq 404) {
-              $msg = "Unmet Dependency: Index {0} not found" -f $EsIndex
-          } else {
-              $msg = "Error: {0}" -f $esIndexStatus.Error
-          }
-          Write-Output $msg
-        } elseif ($EsIndexStatus.$EsIndex) {
-          Write-Debug "  Index $EsIndex Present..."
-          if ($EsCreds) {
-            $RunningPolicy = Get-EsEnrichmentPolicy -ESUrl $EsConfig.eshome -Policy $Policy.name -EsCreds $EsCreds | ConvertFrom-Json -Depth 8
-          } else {
-            $RunningPolicy = Get-EsEnrichmentPolicy -ESUrl $EsConfig.eshome -Policy $Policy.name | ConvertFrom-Json -Depth 8
-          }
-          if ($RunningPolicy.policies.Count -eq 0) {
-            $msg = "Unmet Dependency: Enrichment Policy {0} not loaded" -f $Policy.name
-            Write-Error $msg
-          } else {
-            $msg = "Dependency Met: Enrichment Policy {0} loaded" -f $Policy.name
-            Write-Debug $msg
-          }
+      Write-Debug "Index Status: $EsIndexStatus"
+      if($EsIndexStatus.Error) {
+        if ($EsIndexStatus.status -eq 404) {
+            $msg = "Unmet Dependency: Index {0} not found" -f $EsIndex
+        } else {
+            $msg = "Error: {0}" -f $esIndexStatus.Error
         }
+        Write-Output $msg
+      } elseif ($EsIndexStatus.$EsIndex) {
+        Write-Debug "  Index $EsIndex Present..."
+        if ($EsCreds) {
+          $RunningPolicy = Get-EsEnrichmentPolicy -ESUrl $EsConfig.eshome -Policy $Policy.name -EsCreds $EsCreds | ConvertFrom-Json -Depth 8
+        } else {
+          $RunningPolicy = Get-EsEnrichmentPolicy -ESUrl $EsConfig.eshome -Policy $Policy.name | ConvertFrom-Json -Depth 8
+        }
+        if ($RunningPolicy.policies.Count -eq 0) {
+          $msg = "Unmet Dependency: Enrichment Policy {0} not loaded" -f $Policy.name
+          Write-Error $msg
+        } else {
+          $msg = "Dependency Met: Enrichment Policy {0} loaded" -f $Policy.name
+          Write-Debug $msg
+        }
+      }
     }
-}
+  }
 }

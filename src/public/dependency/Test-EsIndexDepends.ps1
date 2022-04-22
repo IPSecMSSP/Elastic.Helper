@@ -40,9 +40,9 @@ function Test-EsIndexDepends {
     [PSCustomObject] [Parameter(Mandatory=$true)] $EsConfig,
     [string] [Parameter(Mandatory=$false)] $IndexName,
     [PSCustomObject] [Parameter(Mandatory=$false)] $EsCreds
-)
+  )
 
-foreach ($Index in $EsConfig.indices) {
+  foreach ($Index in $EsConfig.indices) {
     # Check all indices if no index name is specified, otherwise check just the one index
     if ( -not($PSBoundParameters.ContainsKey('IndexName')) -or $Index.name -eq $IndexName ) {
         if ($Index.pipeline) {
@@ -69,5 +69,5 @@ foreach ($Index in $EsConfig.indices) {
             }
         }
     }
-}
+  }
 }

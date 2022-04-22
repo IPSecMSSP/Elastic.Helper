@@ -2,7 +2,19 @@
 
 All notable changes have been documented in this file.
 
-## [0.0.8] - 2023-04-12
+## [0.0.10] - 2022-04-13
+
+### Changed
+
+- Force exact match for index definition in Invoke-EsBulkIndexRequest
+
+## [0.0.9] - 2022-04-13
+
+### Changed
+
+- Add switch to match exact for retrieving index definition from config
+
+## [0.0.8] - 2022-04-12
 
 ### Changed
 
