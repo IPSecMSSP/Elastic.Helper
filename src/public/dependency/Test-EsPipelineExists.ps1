@@ -46,9 +46,9 @@ function Test-EsPipelineExists {
     # Check all pipelines if none specified, otherwise check just the one
     if (-not ($PSBoundParameters.ContainsKey('PipelineName')) -or $Pipeline.name -eq $PipelineName) {
       if ($EsCreds) {
-        $PipelineStatus = Get-EsPipeline -ESUrl $EsConfig.eshome -PipelineName $Pipeline -EsCreds $EsCreds
+        $PipelineStatus = Get-EsPipeline -ESUrl $EsConfig.eshome -Pipeline $Pipeline -EsCreds $EsCreds
       } else {
-        $PipelineStatus = Get-EsPipeline -ESUrl $EsConfig.eshome -PipelineName $Pipeline -EsCreds $EsCreds
+        $PipelineStatus = Get-EsPipeline -ESUrl $EsConfig.eshome -Pipeline $Pipeline -EsCreds $EsCreds
       }
 
       if ($PipelineStatus.($Pipeline.name)) {

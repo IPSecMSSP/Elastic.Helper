@@ -45,11 +45,19 @@ function Test-EsIndexExists {
   foreach ($Index in $EsConfig.indices) {
      # Check all indices if no index name is specified, otherwise check just the one index
     if ( -not($PSBoundParameters.ContainsKey('IndexName')) -or $Index.name -eq $IndexName ) {
+      $IndexParams = @{}
+      $IndexParams.Add('ESUrl',$EsConfig.eshome)
       if ($EsCreds) {
-        $EsIndexStatus = Get-EsIndex -ESUrl $EsConfig.eshome -EsIndex $Index.name -EsCreds $EsCreds
-      } else {
-        $EsIndexStatus = Get-EsIndex -ESUrl $EsConfig.eshome -EsIndex $Index.name
+        $IndexParams.Add('EsCreds',$EsCreds)
       }
+
+      if ($Index.indexpattern) {
+        $IndexParams.Add('EsIndex', $Index.indexpattern)
+      } else {
+        $IndexParams.Add('EsIndex', $Index.name)
+      }
+
+      $EsIndexStatus = Get-EsIndex @IndexParams
 
       if($EsIndexStatus.Error) {
         if ($EsIndexStatus.status -eq 404) {
