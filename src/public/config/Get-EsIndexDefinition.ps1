@@ -19,11 +19,11 @@ function Get-EsIndexDefinition {
   foreach ($Index in $EsConfig.Indices) {
     if ($Exact) {
       if ($IndexName -eq $Index.name) {
-        return $Index
+      return $Index
       }
     } else {
       if ($IndexName -match $Index.name) {
-        return $Index
+      return $Index
       }
     }
   }

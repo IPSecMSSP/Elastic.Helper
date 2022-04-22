@@ -30,10 +30,10 @@ function Update-EsEnrichmentPolicy {
   [CmdletBinding(SupportsShouldProcess)]
 
   param (
-      [string] [Parameter(Mandatory=$true)] $ESUrl,
-      [string] [Parameter(Mandatory=$true)] $Policy,
-      [Parameter(Mandatory=$true)] $PolicyDefinition,
-      [PSCustomObject] [Parameter(Mandatory=$false)] $EsCreds
+    [string] [Parameter(Mandatory=$true)] $ESUrl,
+    [string] [Parameter(Mandatory=$true)] $Policy,
+    [Parameter(Mandatory=$true)] $PolicyDefinition,
+    [PSCustomObject] [Parameter(Mandatory=$false)] $EsCreds
   )
 
   $Method = 'PUT'
@@ -48,5 +48,5 @@ function Update-EsEnrichmentPolicy {
     }
   }
 
-return $Result.acknowledged
+  return $Result.acknowledged
 }

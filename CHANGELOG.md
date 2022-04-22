@@ -2,6 +2,25 @@
 
 All notable changes have been documented in this file.
 
+## [0.1.0] - 2022-04-22
+
+### Changed
+
+- Break bulk index request into chunks, default chunk size of 10k
+- Don't sleep in Invoke-EsBulkIndexRequest, moved to Update-EsEnrichmentIndicesFromIndex and time halved
+- Update CI Pipeline to use latest Megalinter
+
+### Fixed
+
+- Code indentation on various files
+- Issue with Deploy-EsConfig with dependency checks where dependency check would fail if resource does not exist
+
+## [0.0.11] - 2022-04-13
+
+### Changed
+
+- Spelling of something
+
 ## [0.0.10] - 2022-04-13
 
 ### Changed

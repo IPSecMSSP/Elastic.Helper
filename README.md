@@ -18,38 +18,38 @@ The configuration file is in JSON format, and borrows most of its structure from
 
 ```json
 {
-    "eshome": "http://localhost:9200",
-    "indices": [
-        {
-            "name": "index-name",
-            "pipeline": "pipeline-name",
-            "settings": {
-                "index": {
-                    "number_of_replicas": 0
-                }
-            }
+  "eshome": "http://localhost:9200",
+  "indices": [
+    {
+      "name": "index-name",
+      "pipeline": "pipeline-name",
+      "settings": {
+        "index": {
+          "number_of_replicas": 0
         }
-    ],
-    "_ingest": {
-        "pipelines": [
-            {
-                "name": "pipeline-name",
-                "definition": {
-                    "description": "Get your pipeline definition from Kibana.  Seriously, writing it by hand sucks."
-                }
-            }
-        ]
-    },
-    "_enrich": {
-        "policies": [
-            {
-                "name": "policy-name",
-                "definition": {
-                    "placeholder": "For this one you will have to read the ES Documentation"
-                }
-            }
-        ]
+      }
     }
+  ],
+  "_ingest": {
+    "pipelines": [
+      {
+        "name": "pipeline-name",
+        "definition": {
+          "description": "Get your pipeline definition from Kibana.  Seriously, writing it by hand sucks."
+        }
+      }
+    ]
+  },
+  "_enrich": {
+    "policies": [
+      {
+        "name": "policy-name",
+        "definition": {
+          "placeholder": "For this one you will have to read the ES Documentation"
+        }
+      }
+    ]
+  }
 }
 ```
 
