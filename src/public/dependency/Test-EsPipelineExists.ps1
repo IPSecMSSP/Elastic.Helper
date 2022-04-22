@@ -47,9 +47,9 @@ function Test-EsPipelineExists {
     if (-not ($PSBoundParameters.ContainsKey('PipelineName')) -or $Pipeline.name -eq $PipelineName) {
       Write-Verbose "Testing existence of Pipeline: $($Pipeline.name)"
       if ($EsCreds) {
-        $PipelineStatus = Get-EsPipeline -ESUrl $EsConfig.eshome -Pipeline $Pipeline -EsCreds $EsCreds
+        $PipelineStatus = Get-EsPipeline -ESUrl $EsConfig.eshome -Pipeline $Pipeline.name -EsCreds $EsCreds
       } else {
-        $PipelineStatus = Get-EsPipeline -ESUrl $EsConfig.eshome -Pipeline $Pipeline -EsCreds $EsCreds
+        $PipelineStatus = Get-EsPipeline -ESUrl $EsConfig.eshome -Pipeline $Pipeline.name -EsCreds $EsCreds
       }
 
       if ($PipelineStatus.($Pipeline.name)) {
