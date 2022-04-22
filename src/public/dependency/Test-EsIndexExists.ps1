@@ -73,7 +73,7 @@ function Test-EsIndexExists {
         Write-Output $true
       }
 
-      Write-debug $EsIndexStatus
+      Write-Debug ($EsIndexStatus | ConvertTo-Json -depth 10)
 
     }
   }
