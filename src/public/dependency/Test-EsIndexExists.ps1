@@ -68,7 +68,7 @@ function Test-EsIndexExists {
         }
         Write-Error $msg
         Write-Output $false
-      } elseif ($EsIndexStatus.{$Index.name}) {
+      } elseif ($EsIndexStatus.PSObject.Properties[0].Name -match $Index.name) {
         Write-verbose "Index exists: $($Index.name)"
         Write-Output $true
       }
