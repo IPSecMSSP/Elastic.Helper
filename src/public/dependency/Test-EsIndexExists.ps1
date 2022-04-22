@@ -73,6 +73,8 @@ function Test-EsIndexExists {
         Write-Output $true
       }
 
+      Write-debug $EsIndexStatus
+
     }
   }
 }
