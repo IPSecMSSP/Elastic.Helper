@@ -45,6 +45,7 @@ function Test-EsPipelineExists {
   foreach($Pipeline in $EsConfig._ingest.pipelines) {
     # Check all pipelines if none specified, otherwise check just the one
     if (-not ($PSBoundParameters.ContainsKey('PipelineName')) -or $Pipeline.name -eq $PipelineName) {
+      Write-Verbose "Testing existence of Pipeline: $($Pipeline.name)"
       if ($EsCreds) {
         $PipelineStatus = Get-EsPipeline -ESUrl $EsConfig.eshome -Pipeline $Pipeline -EsCreds $EsCreds
       } else {
@@ -52,10 +53,14 @@ function Test-EsPipelineExists {
       }
 
       if ($PipelineStatus.($Pipeline.name)) {
+        Write-Verbose "Pipeline exists: $($Pipeline.name)"
         Write-Output $true
       } else {
+        Write-Verbose "Pipeline does not exist: $($Pipeline.name)"
         Write-Output $false
       }
+
+      Write-Debug ($PipelineStatus | ConvertTo-Json -depth 10)
     }
   }
 }
