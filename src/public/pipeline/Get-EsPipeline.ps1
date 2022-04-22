@@ -36,8 +36,8 @@ function Get-EsPipeline {
   $Method = 'GET'
   $Uri = [io.path]::Combine($ESUrl, "_ingest/pipeline/", $Pipeline)
   if ($EsCreds) {
-    Invoke-Elasticsearch -Uri $Uri -Method $Method -ContentType 'application/json' -User $EsCreds.Username -Password $EsCreds.Password -SkipCertificateCheck
+    Invoke-Elasticsearch -Uri $Uri -Method $Method -ContentType 'application/json' -User $EsCreds.Username -Password $EsCreds.Password -SkipCertificateCheck | ConvertFrom-Json -Depth 10
   } else {
-    Invoke-Elasticsearch -Uri $Uri -Method $Method -ContentType 'application/json' -SkipCertificateCheck
-}
+    Invoke-Elasticsearch -Uri $Uri -Method $Method -ContentType 'application/json' -SkipCertificateCheck | ConvertFrom-Json -Depth 10
+  }
 }
