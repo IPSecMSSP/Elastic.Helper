@@ -43,7 +43,7 @@ function Test-EsIndexDepends {
   )
 
   foreach ($Index in $EsConfig.indices) {
-  # Check all indices if no index name is specified, otherwise check just the one index
+     # Check all indices if no index name is specified, otherwise check just the one index
     if ( -not($PSBoundParameters.ContainsKey('IndexName')) -or $Index.name -eq $IndexName ) {
       if ($Index.pipeline) {
         $PipelineDepends = Test-EsPipelineDepends -EsConfig $EsConfig -PipelineName $Index.pipeline

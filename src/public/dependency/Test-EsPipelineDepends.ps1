@@ -39,7 +39,7 @@ function Test-EsPipelineDepends {
     [PsCustomObject] [Parameter(Mandatory=$true)] $EsConfig,
     [string] [Parameter(Mandatory=$false)] $PipelineName,
     [PSCustomObject] [Parameter(Mandatory=$false)] $EsCreds
-)
+  )
 
   # Find the pipeline in the config
   foreach($Pipeline in $EsConfig._ingest.pipelines) {
