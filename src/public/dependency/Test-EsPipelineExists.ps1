@@ -52,7 +52,7 @@ function Test-EsPipelineExists {
         $PipelineStatus = Get-EsPipeline -ESUrl $EsConfig.eshome -Pipeline $Pipeline.name -EsCreds $EsCreds
       }
 
-      if ($PipelineStatus.($Pipeline.name)) {
+      if ($PipelineStatus.PSObject.Properties.Name -Match ($Pipeline.name)) {
         Write-Verbose "Pipeline exists: $($Pipeline.name)"
         Write-Output $true
       } else {
