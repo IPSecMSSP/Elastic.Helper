@@ -13,26 +13,26 @@ function ConvertTo-EsBulkIndex {
     Name of Ingest Pipeline
   #>
 	[OutputType([string])]
-    [cmdletbinding()]
-    param (
-        # Input Data as Array of entries to be converted to Newline Delimited JSON Entries with specific base index
-        [parameter(Mandatory = $true, ValueFromPipeline = $true)]  $Input,
-        [parameter(Mandatory = $true)] $Index,
-        [parameter(Mandatory = $true)] $Pipeline
-    )
+  [cmdletbinding()]
+  param (
+    # Input Data as Array of entries to be converted to Newline Delimited JSON Entries with specific base index
+    [parameter(Mandatory = $true, ValueFromPipeline = $true)]  $Input,
+    [parameter(Mandatory = $true)] $Index,
+    [parameter(Mandatory = $true)] $Pipeline
+  )
 
-    Process {
-        $Results = @()
+  Process {
+    $Results = @()
 
-        $Results += '{"index" : { "_index": "' + $Index + '", "pipeline": "' + $Pipeline + '"}}'
-        $Results += ($Input | ConvertTo-Json -Compress -depth 8) -replace [char] 0x00a0,'-'
+    $Results += '{"index" : { "_index": "' + $Index + '", "pipeline": "' + $Pipeline + '"}}'
+    $Results += ($Input | ConvertTo-Json -Compress -depth 8) -replace [char] 0x00a0,'-'
 
-        Write-Output $Results
+    Write-Output $Results
 
-    }
-    End {
-      # Ensure newline at the end of the request
-      Write-Output ''
-    }
+  }
+  End {
+    # Ensure newline at the end of the request
+    Write-Output ''
+  }
 
 }

@@ -17,7 +17,8 @@ function Invoke-EsBulkIndexRequest {
     [PSCustomObject] [Parameter(Mandatory=$true)] $EsConfig,
     [string] [Parameter(Mandatory=$true)] $IndexName,
     [Parameter(Mandatory=$true)] $InputObject,
-    [PSCustomObject] [Parameter(Mandatory=$false)] $EsCreds
+    [PSCustomObject] [Parameter(Mandatory=$false)] $EsCreds,
+    [int] [Parameter(Mandatory=$false)] $ChunkSize = 10000
   )
 
   Write-Debug "Processing Bulk Index Request..."
@@ -26,17 +27,27 @@ function Invoke-EsBulkIndexRequest {
 
   Write-Debug " URI: $BulkIndexURI"
 
-  $ndjson = $InputObject | ConvertTo-EsBulkIndex -Index $IndexName -Pipeline (Get-EsIndexDefinition -EsConfig $EsConfig -IndexName $IndexName).pipeline
-
-  if ($EsCreds) {
-    Write-Debug " Credentials Supplied"
-    $ndjson -join "`n" | Invoke-Elasticsearch -Uri $BulkIndexURI -Method POST -ContentType 'application/x-ndjson' -User $EsCreds.UserName -Password $EsCreds.Password -SkipCertificateCheck
-  } else {
-    Write-Debug " No Credentials Supplied"
-    $ndjson -join "`n" | Invoke-Elasticsearch -Uri $BulkIndexURI -Method POST -ContentType 'application/x-ndjson' -SkipCertificateCheck
+  # Break the task into chunks
+  $Chunks = [System.Collections.ArrayList]::new()
+  for ($i = 0; $i -lt $InputObject.Count; $i += $ChunkSize) {
+    if (($InputObject.Count - $i) -gt ($ChunkSize -1)) {
+      $Chunks.Add($InputObject[$i..($i + ($ChunkSize -1))])
+    } else {
+      $Chunks.Add($InputObject[$i..($InputObject.Count - 1)])
+    }
   }
 
-  Start-Sleep -Seconds 2
+  foreach ($Chunk in $Chunks) {
+    $ndjson = $Chunk | ConvertTo-EsBulkIndex -Index $IndexName -Pipeline (Get-EsIndexDefinition -EsConfig $EsConfig -IndexName $IndexName -Exact).pipeline
+
+    if ($EsCreds) {
+      Write-Debug " Credentials Supplied"
+      $ndjson -join "`n" | Invoke-Elasticsearch -Uri $BulkIndexURI -Method POST -ContentType 'application/x-ndjson' -User $EsCreds.UserName -Password $EsCreds.Password -SkipCertificateCheck
+    } else {
+      Write-Debug " No Credentials Supplied"
+      $ndjson -join "`n" | Invoke-Elasticsearch -Uri $BulkIndexURI -Method POST -ContentType 'application/x-ndjson' -SkipCertificateCheck
+    }
+  }
 
   # After indexing a bunch of records, update the enrichment indices (if any) associated to the index
   Write-Debug " Updating Enrichment Indices"
