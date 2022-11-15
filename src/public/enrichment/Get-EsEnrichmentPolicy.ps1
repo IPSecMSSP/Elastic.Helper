@@ -22,7 +22,7 @@ function Get-EsEnrichmentPolicy {
 
       PS C:\> $EnrichPol = Get-EsEnrichmentPolicy -EsUrl http://192.168.1.10:9200 -Policy 'MyEnrichmentPolicy'
   .LINK
-      https://github.com/jberkers42/Elastic.Helper
+      https://github.com/IPSecMSSP/Elastic.Helper
   #>
 
   [CmdletBinding()]

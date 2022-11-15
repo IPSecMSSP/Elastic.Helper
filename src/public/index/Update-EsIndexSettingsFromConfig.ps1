@@ -24,7 +24,7 @@ function Update-EsIndexSettingsFromConfig {
     PS C:\> $EsConf = Get-EsHelperConfig -ConfigName 'esproject'
     PS C:\> $result = Update-EsIndexSettingsFromConfig -EsConf $EsConf -IndexName 'MyIndex'
   .LINK
-    https://github.com/jberkers42/Elastic.Helper
+    https://github.com/IPSecMSSP/Elastic.Helper
   #>
 
   [CmdletBinding(SupportsShouldProcess)]

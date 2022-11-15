@@ -12,7 +12,7 @@
 RootModule = 'Elastic.Helper.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.11'
+ModuleVersion = '1.0.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -109,13 +109,13 @@ PrivateData = @{
         # LicenseUri = ''
 
         # A URL to the main website for this project.
-        ProjectUri = 'https://github.com/jberkers42/Elastic.Helper'
+        ProjectUri = 'https://github.com/IPSecMSSP/Elastic.Helper'
 
         # A URL to an icon representing this module.
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = 'Added support for bulk indexing'
+        ReleaseNotes = 'Production Code Signing'
 
         # Prerelease string of this module
         # Prerelease = ''

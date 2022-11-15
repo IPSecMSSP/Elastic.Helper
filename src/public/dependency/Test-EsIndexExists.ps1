@@ -30,7 +30,7 @@ function Test-EsIndexExists {
 
     PS C:\> $Result = Test-EsIndexExists -EsConfig $EsConfig -IndexName 'MyIndex'
   .LINK
-    https://github.com/jberkers42/Elastic.Helper
+    https://github.com/IPSecMSSP/Elastic.Helper
   #>
 
   [CmdletBinding()]

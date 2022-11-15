@@ -28,7 +28,7 @@ function Update-EsPipeline {
 
       PS C:\> $EnrichPol = Update-EsPipelineSettings -EsUrl http://192.168.1.10:9200 -Pipeline 'MyPipeline' -PipelineDefinition $PipelineDef
   .LINK
-      https://github.com/jberkers42/Elastic.Helper
+      https://github.com/IPSecMSSP/Elastic.Helper
   #>
 
   [CmdletBinding(SupportsShouldProcess)]

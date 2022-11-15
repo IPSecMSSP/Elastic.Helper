@@ -30,7 +30,7 @@ function Test-EsPipelineExists {
 
       PS C:\> $Result = Test-EsPipelineExists -EsConfig $EsConfig -PipelineName 'MyPipeline'
   .LINK
-      https://github.com/jberkers42/Elastic.Helper
+      https://github.com/IPSecMSSP/Elastic.Helper
   #>
 
   [CmdletBinding()]

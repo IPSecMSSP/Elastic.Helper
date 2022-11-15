@@ -1,6 +1,20 @@
 # Changelog
 
-All notable changes have been documented in this file.
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+## [1.0.0] - 2022-11-15
+
+### Changed
+
+- Migrated primary development to IPSec internal
+  - Code signing security reasons
+- Updated repository references
+- Update Linter configurations
 
 ## [0.1.0] - 2022-04-22
 
@@ -78,3 +92,10 @@ The initial module framework.
 - CHANGELOG.md
 - README.md
 - Module elements
+
+### Known Issues
+
+[Unreleased]: https://github.com/IPSecMSSP/Elastic.Helper
+[1.0.0]: https://github.com/IPSecMSSP/Elastic.Helper/releases/tag/v1.0.0
+[0.1.0]: https://github.com/IPSecMSSP/Elastic.Helper/releases/tag/v0.1.0
+[0.0.3]: https://github.com/IPSecMSSP/Elastic.Helper/releases/tag/v0.0.3

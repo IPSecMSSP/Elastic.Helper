@@ -31,7 +31,7 @@ function Get-EsHelperConfig {
 
     PS C:\> $EsConf = Get-EsHelperConfig -ConfigName elasticproject -Path '/opt/scripts/project/etc'
   .LINK
-    https://github.com/jberkers42/Elastic.Helper
+    https://github.com/IPSecMSSP/Elastic.Helper
   #>
 
   [CmdletBinding()]

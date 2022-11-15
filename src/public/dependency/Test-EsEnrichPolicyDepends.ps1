@@ -30,7 +30,7 @@ function Test-EsEnrichPolicyDepends {
 
         PS C:\> $Result = Test-EsEnrichmentPolicyDepends -EsConfig $EsConfig -PolicyName 'MyEnrichmentPolicy'
     .LINK
-        https://github.com/jberkers42/Elastic.Helper
+        https://github.com/IPSecMSSP/Elastic.Helper
     #>
 
   [CmdletBinding()]
