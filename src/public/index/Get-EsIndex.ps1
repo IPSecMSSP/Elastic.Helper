@@ -23,7 +23,7 @@ function Get-EsIndex {
 
       PS C:\> $EsIndex = Get-EsIndex -EsUrl http://192.168.1.10:9200 -EsIndex 'MyIndex'
   .LINK
-      https://github.com/jberkers42/Elastic.Helper
+      https://github.com/IPSecMSSP/Elastic.Helper
   #>
 
   [CmdletBinding()]

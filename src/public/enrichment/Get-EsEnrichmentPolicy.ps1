@@ -22,7 +22,7 @@ function Get-EsEnrichmentPolicy {
 
       PS C:\> $EnrichPol = Get-EsEnrichmentPolicy -EsUrl http://192.168.1.10:9200 -Policy 'MyEnrichmentPolicy'
   .LINK
-      https://github.com/jberkers42/Elastic.Helper
+      https://github.com/IPSecMSSP/Elastic.Helper
   #>
 
   [CmdletBinding()]
@@ -37,9 +37,9 @@ function Get-EsEnrichmentPolicy {
   $Uri = [io.path]::Combine($ESUrl, "_enrich/policy/", $Policy)
 
   if ($EsCreds){
-    Invoke-Elasticsearch -Uri $Uri -Method $Method -ContentType 'application/json' -User $EsCreds.Username -Password $EsCreds.Password -SkipCertificateCheck
+    Invoke-Elasticsearch -Uri $Uri -Method $Method -ContentType 'application/json' -User $EsCreds.Username -Password $EsCreds.Password -SkipCertificateCheck | ConvertFrom-Json -Depth 10
   } else {
-    Invoke-Elasticsearch -Uri $Uri -Method $Method -ContentType 'application/json' -SkipCertificateCheck
+    Invoke-Elasticsearch -Uri $Uri -Method $Method -ContentType 'application/json' -SkipCertificateCheck | ConvertFrom-Json -Depth 10
   }
 
 }

@@ -24,16 +24,16 @@ function Update-EsEnrichmentPolicy {
 
       PS C:\> $EnrichPol = Update-EsEnrichmentPolicy -EsUrl http://192.168.1.10:9200 -Policy 'MyEnrichmentPolicy' -PolicyDefinition $PolicyDef
   .LINK
-      https://github.com/jberkers42/Elastic.Helper
+      https://github.com/IPSecMSSP/Elastic.Helper
   #>
 
   [CmdletBinding(SupportsShouldProcess)]
 
   param (
-      [string] [Parameter(Mandatory=$true)] $ESUrl,
-      [string] [Parameter(Mandatory=$true)] $Policy,
-      [Parameter(Mandatory=$true)] $PolicyDefinition,
-      [PSCustomObject] [Parameter(Mandatory=$false)] $EsCreds
+    [string] [Parameter(Mandatory=$true)] $ESUrl,
+    [string] [Parameter(Mandatory=$true)] $Policy,
+    [Parameter(Mandatory=$true)] $PolicyDefinition,
+    [PSCustomObject] [Parameter(Mandatory=$false)] $EsCreds
   )
 
   $Method = 'PUT'
@@ -48,5 +48,5 @@ function Update-EsEnrichmentPolicy {
     }
   }
 
-return $Result.acknowledged
+  return $Result.acknowledged
 }
