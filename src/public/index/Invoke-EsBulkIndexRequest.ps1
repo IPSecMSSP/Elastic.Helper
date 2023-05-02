@@ -42,10 +42,10 @@ function Invoke-EsBulkIndexRequest {
 
     if ($EsCreds) {
       Write-Debug " Credentials Supplied"
-      $ndjson -join "`n" | Invoke-Elasticsearch -Uri $BulkIndexURI -Method POST -ContentType 'application/x-ndjson' -User $EsCreds.UserName -Password $EsCreds.Password -SkipCertificateCheck
+      $ndjson -join "`n" | Invoke-Elasticsearch -Uri $BulkIndexURI -Method POST -ContentType 'application/x-ndjson; charset=utf-8' -User $EsCreds.UserName -Password $EsCreds.Password -SkipCertificateCheck
     } else {
       Write-Debug " No Credentials Supplied"
-      $ndjson -join "`n" | Invoke-Elasticsearch -Uri $BulkIndexURI -Method POST -ContentType 'application/x-ndjson' -SkipCertificateCheck
+      $ndjson -join "`n" | Invoke-Elasticsearch -Uri $BulkIndexURI -Method POST -ContentType 'application/x-ndjson; charset=utf-8' -SkipCertificateCheck
     }
   }
 
