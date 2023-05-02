@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2023-05-02
+
+- [#1] When data to be indexed contains a 'diacritic', the entire index request terminates
+- Updated JSCPD configuration file
+
 ## [1.0.0] - 2022-11-15
 
 ### Changed
@@ -99,3 +104,4 @@ The initial module framework.
 [1.0.0]: https://github.com/IPSecMSSP/Elastic.Helper/releases/tag/v1.0.0
 [0.1.0]: https://github.com/IPSecMSSP/Elastic.Helper/releases/tag/v0.1.0
 [0.0.3]: https://github.com/IPSecMSSP/Elastic.Helper/releases/tag/v0.0.3
+[#1]: https://github.com/IPSecMSSP/Elastic.Helper/issues/1
