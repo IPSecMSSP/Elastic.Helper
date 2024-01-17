@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Updated Signing to use Azure Key Vault to sign code
+
 ## [1.0.1] - 2023-05-02
 
 - [#1] When data to be indexed contains a 'diacritic', the entire index request terminates
