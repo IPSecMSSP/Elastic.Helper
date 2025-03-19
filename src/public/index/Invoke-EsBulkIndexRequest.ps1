@@ -12,13 +12,28 @@ function Invoke-EsBulkIndexRequest {
     Name of ElasticSearch Index to return definition for
   .PARAMETER InputArray
     Array of PSObjects to sumbit to the index
+  .PARAMETER Operation
+    Name of Operation to perform, defaults to index
   #>
   param (
-    [PSCustomObject] [Parameter(Mandatory=$true)] $EsConfig,
-    [string] [Parameter(Mandatory=$true)] $IndexName,
-    [Parameter(Mandatory=$true)] $InputObject,
-    [PSCustomObject] [Parameter(Mandatory=$false)] $EsCreds,
-    [int] [Parameter(Mandatory=$false)] $ChunkSize = 10000
+    [PSCustomObject] [Parameter(Mandatory=$true)]
+    $EsConfig,
+
+    [Parameter(Mandatory=$true)]
+    [string]$IndexName,
+
+    [Parameter(Mandatory=$true)]
+    $InputObject,
+
+    [PSCustomObject] [Parameter(Mandatory=$false)]
+    $EsCreds,
+
+    [Parameter(Mandatory=$false)]
+    [int]$ChunkSize = 10000,
+
+    [parameter(Mandatory = $false)]
+    [ValidateSet ('index', 'create', 'update', 'delete')]
+    [string]$Operation = 'index'
   )
 
   Write-Debug "Processing Bulk Index Request..."
@@ -38,7 +53,7 @@ function Invoke-EsBulkIndexRequest {
   }
 
   foreach ($Chunk in $Chunks) {
-    $ndjson = $Chunk | ConvertTo-EsBulkIndex -Index $IndexName -Pipeline (Get-EsIndexDefinition -EsConfig $EsConfig -IndexName $IndexName -Exact).pipeline
+    $ndjson = $Chunk | ConvertTo-EsBulkIndex -Index $IndexName -Pipeline (Get-EsIndexDefinition -EsConfig $EsConfig -IndexName $IndexName -Exact).pipeline -Operation $Operation
 
     if ($EsCreds) {
       Write-Debug " Credentials Supplied"
