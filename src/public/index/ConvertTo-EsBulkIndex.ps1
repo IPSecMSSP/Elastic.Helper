@@ -11,21 +11,33 @@ function ConvertTo-EsBulkIndex {
     Name of index, may be overridden by Pipeline configuration
   .PARAMETER Pipeline
     Name of Ingest Pipeline
+  .PARAMETER Operation
+    Name of Operation to perform, defaults to index
   #>
-	[OutputType([string])]
+  [OutputType([string])]
   [cmdletbinding()]
   param (
     # Input Data as Array of entries to be converted to Newline Delimited JSON Entries with specific base index
-    [parameter(Mandatory = $true, ValueFromPipeline = $true)]  $Input,
-    [parameter(Mandatory = $true)] $Index,
-    [parameter(Mandatory = $true)] $Pipeline
+    [parameter(Mandatory = $true,
+      ValueFromPipeline = $true)]
+    $Input,
+
+    [parameter(Mandatory = $true)]
+    $Index,
+
+    [parameter(Mandatory = $true)]
+    $Pipeline,
+
+    [parameter(Mandatory = $false)]
+    [ValidateSet ('index','create','update','delete')]
+    $Operation = 'index'
   )
 
   Process {
     $Results = @()
 
-    $Results += '{"index" : { "_index": "' + $Index + '", "pipeline": "' + $Pipeline + '"}}'
-    $Results += ($Input | ConvertTo-Json -Compress -depth 8) -replace [char] 0x00a0,'-'
+    $Results += '{"{0}" : { "_index": "{1}", "pipeline": "{2}"}}' -f $Operation, $Index, $Pipeline
+    $Results += ($Input | ConvertTo-Json -Compress -depth 8) -replace [char] 0x00a0, '-'
 
     Write-Output $Results
 
