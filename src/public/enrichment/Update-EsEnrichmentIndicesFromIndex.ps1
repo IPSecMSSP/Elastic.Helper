@@ -12,7 +12,7 @@ function Update-EsEnrichmentIndicesFromIndex {
   .PARAMETER EsConfig
     ElasticHelper configuration loaded using Get-EsHelperConfig.
   .PARAMETER IndexName
-    (Optional) Name of Index to check for unmet dependencies.
+    Name of Index to check whether Enrichment Indices need to be updated.
 
     If not specified, checks all defined Indices.
   .PARAMETER EsCreds
@@ -32,29 +32,44 @@ function Update-EsEnrichmentIndicesFromIndex {
   [CmdletBinding(SupportsShouldProcess)]
 
   param(
-  [PSCustomObject] [Parameter(Mandatory=$true)] $EsConfig,
-  [string] [Parameter(Mandatory=$true)] $IndexName,
-  [PSCustomObject] [Parameter(Mandatory=$false)] $EsCreds
-)
+    [PSCustomObject] [Parameter(Mandatory = $true)] $EsConfig,
+    [string] [Parameter(Mandatory = $true)] $IndexName,
+    [PSCustomObject] [Parameter(Mandatory = $false)] $EsCreds
+  )
 
-# Look through the Enrich Policies in our configuration
-foreach ($Policy in $EsConfig._enrich.policies) {
-  # Find those that depend on our index
-  if ($IndexName -match $Policy.definition.match.indices) {
-    if ($PSCmdlet.ShouldProcess($Policy.name)) {
-      # Update the Enrichment Index
-      $msg = "Updating Enrichment Policy Index - Index: {0}; Policy: {1};" -f $IndexName, $Policy.name
-      Write-Debug $msg
+  Begin {
+    $Me = $MyInvocation.MyCommand.Name
 
-      # Sleep briefly to allow Index to quiesce
-      Start-Sleep -Seconds 1
-      if ($EsCreds) {
-        $result = Update-EsEnrichmentIndices -ESUrl $EsConfig.eshome -Policy $Policy.name -EsCreds $EsCreds
-      } else {
-        $result = Update-EsEnrichmentIndices -ESUrl $EsConfig.eshome -Policy $Policy.name
+    # Extract the specific index definition from the provided ES Configuration
+    $IndexDefinition = $EsConfig.indices | Where-Object -Property name -eq $IndexName
+  }
+
+  Process {
+
+    # Look through the Enrich Policies in our configuration
+    foreach ($Policy in $EsConfig._enrich.policies) {
+      # Find those that depend on our index
+      if (($IndexName -match $Policy.definition.match.indices) -or ($IndexDefinition.index_pattern -match $Policy.definition.match.indices)) {
+        if ($PSCmdlet.ShouldProcess($Policy.name)) {
+          # Update the Enrichment Index
+          $msg = "{0}: Updating Enrichment Policy Index - Index: {0}; Policy: {1};" -f $Me, $IndexName, $Policy.name
+          Write-Debug $msg
+
+          # Sleep briefly to allow Index to quiesce
+          Start-Sleep -Seconds 1
+          if ($EsCreds) {
+            $result = Update-EsEnrichmentIndices -ESUrl $EsConfig.eshome -Policy $Policy.name -EsCreds $EsCreds
+          }
+          else {
+            $result = Update-EsEnrichmentIndices -ESUrl $EsConfig.eshome -Policy $Policy.name
+          }
+        }
+        Write-Debug $result
       }
     }
-    Write-Debug $result
   }
 }
+
+End {
+
 }
