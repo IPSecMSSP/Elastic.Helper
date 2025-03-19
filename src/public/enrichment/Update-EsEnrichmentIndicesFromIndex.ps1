@@ -52,7 +52,7 @@ function Update-EsEnrichmentIndicesFromIndex {
       if (($IndexName -match $Policy.definition.match.indices) -or ($IndexDefinition.index_pattern -match $Policy.definition.match.indices)) {
         if ($PSCmdlet.ShouldProcess($Policy.name)) {
           # Update the Enrichment Index
-          $msg = "Updating Enrichment Policy Index - Index: {0}; Policy: {1};" -f $IndexName, $Policy.name
+          $msg = "{0}: Updating Enrichment Policy Index - Index: {0}; Policy: {1};" -f $Me, $IndexName, $Policy.name
           Write-Debug $msg
 
           # Sleep briefly to allow Index to quiesce
