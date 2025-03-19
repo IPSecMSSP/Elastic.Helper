@@ -68,8 +68,9 @@ function Update-EsEnrichmentIndicesFromIndex {
       }
     }
   }
-}
 
-End {
 
+  End {
+
+  }
 }
