@@ -20,23 +20,38 @@ function ConvertTo-EsBulkIndex {
     # Input Data as Array of entries to be converted to Newline Delimited JSON Entries with specific base index
     [parameter(Mandatory = $true,
       ValueFromPipeline = $true)]
-    $Input,
+    [psobject[]]$Input,
 
     [parameter(Mandatory = $true)]
-    $Index,
+    [string]$Index,
 
     [parameter(Mandatory = $true)]
-    $Pipeline,
+    [string]$Pipeline,
 
     [parameter(Mandatory = $false)]
     [ValidateSet ('index','create','update','delete')]
-    $Operation = 'index'
+    [string]$Operation = 'index'
   )
+
+  Begin {
+    $Me = $MyInvocation.MyCommand.Name
+
+    Write-Verbose ('{0}: Entering function' -f $Me)
+  }
 
   Process {
     $Results = @()
 
-    $Results += '{"{0}" : { "_index": "{1}", "pipeline": "{2}"}}' -f $Operation, $Index, $Pipeline
+    $op = @{
+      $operation = @{
+        '_index' = $Index
+        'pipeline' = $Pipeline
+      }
+    }
+
+    Write-Verbose ('{0}: Adding operation details' -f $Me)
+    $Results += $op | ConvertTo-Json -Compress
+    Write-Verbose ('{0}: Adding record' -f $Me)
     $Results += ($Input | ConvertTo-Json -Compress -depth 8) -replace [char] 0x00a0, '-'
 
     Write-Output $Results
